@@ -4,7 +4,15 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/ HomeR GET POST
+
+/ HomeR GET
+
+/produto                    ProdutoR       GET POST
+/produto/#ProdutoId/perfil  PerfilProdR    GET
+/produto/listar             ListaProdutoR  GET
+/produto/#ProdutoId/apagar  ApagarProdR    POST
+
+/ CompraR GET POST
 
 /comments CommentR POST
 
