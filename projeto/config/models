@@ -18,4 +18,5 @@ Cliente json
 Fornecedores json
     nome    Text
     Telefone    Text
+    email   Text
     deriving Show
