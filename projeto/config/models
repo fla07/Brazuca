@@ -14,3 +14,8 @@ Cliente json
     cpf      Text
     email    Text
     UniqueEmail email 
+
+Fornecedores json
+    nome    Text
+    Telefone    Text
+    deriving Show
