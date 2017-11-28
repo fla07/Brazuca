@@ -20,3 +20,8 @@ Fornecedores json
     Telefone    Text
     email   Text
     deriving Show
+    
+Categoria json
+    nome    Text
+    descricao   Text
+    deriving Show
