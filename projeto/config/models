@@ -1,27 +1,28 @@
 Produto json
-    nome     Text
-    preco    Double
-    estoque  Int
+    nome        Text
+    preco       Double
+    estoque     Int
     deriving Show
 
 Compra json
-    cliid    ClienteId
-    proid    ProdutoId
-    comprado Int
-
+    cliid       ClienteId
+    proid       ProdutoId
+    comprado    Int
+    deriving Show
+    
 Cliente json
-    nome     Text
-    cpf      Text
-    email    Text
-    UniqueEmail email 
-
+    nome        Text
+    cpf         Text
+    email       Text
+    deriving Show
+    
 Fornecedores json
-    nome    Text
-    Telefone    Text
-    email   Text
+    nome        Text
+    telefone    Text
+    email       Text
     deriving Show
     
 Categoria json
-    nome    Text
+    nome        Text
     descricao   Text
     deriving Show

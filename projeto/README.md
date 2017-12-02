@@ -9,6 +9,23 @@ Todos os arquivos referentes ao trabalho estão na pasta "projeto".
 Existe uma tentativa de criar a interface no ELM, mas caso não dê, um modelo foi 
 criado usando HTML e CSS normal, então, vai ter que ser esse mesmo em um plano B
 
+/*********************************/
+Fazer a modificação
+
+Open your C9 project window, and go to the terminal.Set your git config username:
+git config --global user.name "Your Name Here"
+
+Set your git config email (which should match your github account email):
+git config --global user.email "your_email@example.com"
+
+git init
+
+git add .
+
+git commit -m "comentario"
+
+git push
+/*********************************/
 
 Database Credentials
 

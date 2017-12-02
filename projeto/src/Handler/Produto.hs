@@ -1,58 +1,85 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies, DeriveGeneric #-}
+{-# LANGUAGE TypeFamilies #-}
+-- | Common handler functions.
 module Handler.Produto where
 
 import Import
-import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
 
-data Nome = Nome {nome :: Text} deriving Generic
-instance ToJSON Nome where
-instance FromJSON Nome where 
+formProd :: Form Produto 
+formProd = renderDivs $ Produto 
+    <$> areq textField "Nome: " Nothing
+    <*> areq doubleField "Preco: " Nothing 
+    <*> areq intField "Estoque: " Nothing
+    
+getProdutoR :: Handler Html
+getProdutoR = do 
+    (widget,enctype) <- generateFormPost formProd
+    defaultLayout $ do 
+        [whamlet|
+            <form action=@{ProdutoR} method=post>
+                ^{widget}
+                <input type="submit" value="Cadastrar">
+        |]
 
-patchAlteraNomeR  :: ProdutoId -> Handler Value
-patchAlteraNomeR pid = do 
-   _ <- runDB $ get404 pid
-   novoNome <- requireJsonBody :: Handler Nome
-   runDB $ update pid [ProdutoNome =. (nome novoNome)]
-   sendStatusJSON noContent204 
-                 (object ["resp" .= ("UPATED " ++ show (fromSqlKey pid))])
+postProdutoR :: Handler Html 
+postProdutoR = do 
+    ((resultado,_),_) <- runFormPost formProd
+    case resultado of 
+        FormSuccess produto -> do 
+            pid <- runDB $ insert produto
+            redirect (PerfilProdR pid)
+        _ -> redirect HomeR
 
-putAlteraProdR :: ProdutoId -> Handler Value
-putAlteraProdR pid = do 
-   _ <- runDB $ get404 pid
-   novoProd <- requireJsonBody :: Handler Produto
-   runDB $ replace pid novoProd
-   sendStatusJSON noContent204 
-                 (object ["resp" .= ("UPATED " ++ show (fromSqlKey pid))])
+getListaProdutoR :: Handler Html
+getListaProdutoR = do 
+    produtos <- runDB $ selectList [] [Asc ProdutoNome]
+    defaultLayout $ do 
+        [whamlet|
+            <table>
+                <thead>
+                    <tr>
+                        <td> 
+                            Nome
+                        <td>
+                            Preco
+                        <td>
+                            Estoque
+                        <td>
+                            
+                <tbody>
+                    $forall (Entity pid produto) <- produtos
+                        <tr>
+                            <td> 
+                                <a href=@{PerfilProdR pid}> 
+                                    #{produtoNome produto}
+                            <td>
+                                #{produtoPreco produto}
+                            <td>
+                                #{produtoEstoque produto}
+                            <td>
+                                <form action=@{ApagarProdR pid} method=post>
+                                    <input type="submit" value="Apagar">
+                        
+                        
+        |]
 
-
-getBuscaProdR :: ProdutoId -> Handler Value
-getBuscaProdR pid = do 
-   produto <- runDB $ get404 pid
-   sendStatusJSON ok200 (object ["resp" .= toJSON produto])
-
--- REST
--- O get404 procura um registro, se achar prossegue, se nao, para
--- barra o restante da funcao jogando um status 404
-deleteProdutoDelR :: ProdutoId -> Handler Value
-deleteProdutoDelR pid = do 
+getPerfilProdR :: ProdutoId -> Handler Html
+getPerfilProdR pid = do
+    produto <- runDB $ get404 pid
+    defaultLayout $ do 
+        [whamlet|
+            <h1> Produto #{produtoNome produto}
+            <h2> Estoque #{produtoEstoque produto}
+            <h2> Preco #{produtoPreco produto}
+        |]
+        
+postApagarProdR :: ProdutoId -> Handler Html
+postApagarProdR pid = do 
     _ <- runDB $ get404 pid
-    runDB $ delete pid
-    sendStatusJSON noContent204 
-                 (object ["resp" .= ("DELETED " ++ show (fromSqlKey pid))])
-
-postProdutoR :: Handler Value
-postProdutoR = do
-    prod <- requireJsonBody :: Handler Produto
-    pid <- runDB $ insert prod
-    sendStatusJSON created201 (object ["resp" .= (fromSqlKey pid)])
-
-getMenorEstoqueR :: Int -> Handler TypedContent
-getMenorEstoqueR estoque = do
-   -- PRODS EH UMA LISTA
-   prods <- runDB $ selectList [ProdutoEstoque <=. estoque] [Asc ProdutoNome]
-   sendStatusJSON ok200 (object ["resp" .= toJSON prods])
+    runDB $ delete pid 
+    redirect ListaProdutoR

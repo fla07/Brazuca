@@ -1,13 +1,13 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies, DeriveGeneric #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Handler.Cliente where
 
 import Import
-import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
 
 postClienteR :: Handler TypedContent
