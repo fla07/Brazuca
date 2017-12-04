@@ -16,8 +16,6 @@
 /produto/alterar/nome/#ProdutoId     AlteraNomeR    PATCH
 /produto/listar/#Int/menorestoque    MenorEstoqueR  GET
 
-
-
 /cliente/inserir                     ClienteR       POST
 /cliente/buscar/#ClienteId           BuscaCliR      GET
 /cliente/buscar/#Text/email          EmailCliR      GET
@@ -25,3 +23,6 @@
 /compra/inserir                      CompraR        POST
 /compra/#ClienteId/listar            ListaProdR     GET
 /compra/#ClienteId/listarf           ListaProdFR    GET
+
+/fornecedor/inserir                 FornecedorR     POST
+/fornecedor/apagar/#FornecedorId    FornecedorDelR  DELETE

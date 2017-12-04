@@ -17,7 +17,7 @@ Cliente json
     UniqueEmail email
     deriving Show
     
-Fornecedores json
+Fornecedor json
     nome        Text
     telefone    Text
     email       Text

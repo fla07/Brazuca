@@ -16,6 +16,6 @@ getHomeR = do
         [whamlet|
             <h1> BEM-VINDO AO SISTEMA DE PRODUTOS
             <ul>
-                <li> <a href=@{ProdutoR}> Cadastro de Produto
-                <li> <a href=@{ListaProdutoR}> Listagem
+               <li> <a href=@{ProdutoR}> Cadastro de Produto
+               <li> <a href=@{ListaProdutoR}> Listagem
         |]
