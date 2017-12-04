@@ -34,3 +34,4 @@
 /categoria/apagar/#CategoriaId      CategoriaDelR  DELETE
 /categoria/buscar/#CategoriaId      BuscaCatR    GET
 /categoria/alterar/#CategoriaId     AlteraCatR   PUT
+/categoria/alterar/nome/#CategoriaId  AlterarNomeR    PATCH
