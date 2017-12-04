@@ -38,3 +38,32 @@ getPerfilCatR pid = do
             <h1> Nome #{categoriaNome categoria}
             <h2> Descricao #{categoriaDescricao categoria}
         |]
+        
+getListaCategoriaR :: Handler Html
+getListaCategoriaR = do 
+    categoria <- runDB $ selectList [] [Asc CategoriaNome]
+    defaultLayout $ do 
+        [whamlet|
+            <table>
+                <thead>
+                    <tr>
+                        <td> 
+                            Nome
+                        <td>
+                            Descricao
+                        <td>
+                            
+                <tbody>
+                    $forall (Entity pid categoria) <- categorias
+                        <tr>
+                            <td> 
+                                <a href=@{PerfilCatR pid}> 
+                                #{categoriarNome categoria}
+                            <td>
+                                #{categoriaDescricao categoria}
+                            <td>
+                                <form action=@{ApagarCatR pid} method=post>
+                                    <input type="submit" value="Apagar">
+                        
+                        
+        |]
