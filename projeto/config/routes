@@ -29,3 +29,5 @@
 /fornecedor/buscar/#FornecedorId    BuscaFornecR    GET
 /fornecedor/alterar/#FornecedorId   AlteraFornecR   PUT
 /fornecedor/alterar/nome/#FornecedorId  AlterarNomeR    PATCH
+
+/categoria/inserir                  CategoriaR      POST

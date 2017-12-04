@@ -14,3 +14,12 @@ formCat :: Form Categoria
 formCat = renderDivs $ Categoria 
     <$> areq textField "Nome: " Nothing
     <*> areq textField "Descricao: " Nothing
+    
+postCategoriaR :: Handler Html 
+postCategoriaR = do 
+    ((resultado,_),_) <- runFormPost formCat
+    case resultado of 
+        FormSuccess categoria -> do 
+            pid <- runDB $ insert categoria
+            redirect (PerfilCatR pid)
+        _ -> redirect HomeR
