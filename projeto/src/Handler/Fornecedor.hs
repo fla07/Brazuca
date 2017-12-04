@@ -67,7 +67,7 @@ getListaFornecedorR = do
         
 getPerfilFornecR :: FornecedorId -> Handler Html
 getPerfilFornecR pid = do
-    produto <- runDB $ get404 pid
+    fornecedor <- runDB $ get404 pid
     defaultLayout $ do 
         [whamlet|
             <h1> Nome #{fornecedorNome fornecedor}
