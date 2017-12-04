@@ -74,3 +74,13 @@ getPerfilFornecR pid = do
             <h2> Telefone #{fornecedorTelefone fornecedor}
             <h2> Email #{fornecedorEmail fornecedor}
         |]
+        
+getFornecedorR :: Handler Html
+getFornecedorR = do 
+    (widget,enctype) <- generateFormPost formFornec
+    defaultLayout $ do 
+        [whamlet|
+            <form action=@{FornecedorR} method=post>
+                ^{widget}
+                <input type="submit" value="Cadastrar">
+        |]
