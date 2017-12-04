@@ -31,3 +31,4 @@
 /fornecedor/alterar/nome/#FornecedorId  AlterarNomeR    PATCH
 
 /categoria/inserir                  CategoriaR      POST
+/categoria/apagar/#CategoriaId      CategoriaDelR  DELETE

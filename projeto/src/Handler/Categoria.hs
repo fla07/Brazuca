@@ -23,3 +23,9 @@ postCategoriaR = do
             pid <- runDB $ insert categoria
             redirect (PerfilCatR pid)
         _ -> redirect HomeR
+        
+postApagarCatR :: CategoriaId -> Handler Html
+postApagarCatR pid = do 
+    _ <- runDB $ get404 pid
+    runDB $ delete pid 
+    redirect ListaCategoriaR
