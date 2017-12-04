@@ -33,3 +33,4 @@
 /categoria/inserir                  CategoriaR      POST
 /categoria/apagar/#CategoriaId      CategoriaDelR  DELETE
 /categoria/buscar/#CategoriaId      BuscaCatR    GET
+/categoria/alterar/#CategoriaId     AlteraCatR   PUT
