@@ -29,3 +29,12 @@ postApagarCatR pid = do
     _ <- runDB $ get404 pid
     runDB $ delete pid 
     redirect ListaCategoriaR
+    
+getPerfilCatR :: CategoriaId -> Handler Html
+getPerfilCatR pid = do
+    categoria <- runDB $ get404 pid
+    defaultLayout $ do 
+        [whamlet|
+            <h1> Nome #{categoriaNome categoria}
+            <h2> Descricao #{categoriaDescricao categoria}
+        |]
