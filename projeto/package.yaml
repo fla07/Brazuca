@@ -39,6 +39,7 @@ dependencies:
 - wai-logger >=2.2 && <2.4
 - file-embed
 - safe
+- persistent-postgresql
 - unordered-containers
 - containers
 - vector
@@ -46,6 +47,7 @@ dependencies:
 - case-insensitive
 - wai-cors >= 0.2.5
 - wai
+- http-types
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
@@ -101,4 +103,4 @@ flags:
   dev:
     description: Turn on development settings, like auto-reload templates.
     manual: false
-    default: false
+    default: true

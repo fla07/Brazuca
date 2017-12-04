@@ -2,7 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies, DeriveGeneric #-}
+{-# LANGUAGE TypeFamilies #-}
+
 module Handler.Compra where
 
 import Control.Monad
