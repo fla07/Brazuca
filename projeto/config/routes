@@ -26,3 +26,4 @@
 
 /fornecedor/inserir                 FornecedorR     POST
 /fornecedor/apagar/#FornecedorId    FornecedorDelR  DELETE
+/fornecedor/buscar/#FornecedorId    BuscaFornecR    GET
