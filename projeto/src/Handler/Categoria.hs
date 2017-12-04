@@ -24,6 +24,16 @@ postCategoriaR = do
             redirect (PerfilCatR pid)
         _ -> redirect HomeR
         
+getCategoriaR :: Handler Html
+getCategoriaR = do 
+    (widget,enctype) <- generateFormPost formCat
+    defaultLayout $ do 
+        [whamlet|
+            <form action=@{CategoriaR} method=post>
+                ^{widget}
+                <input type="submit" value="Cadastrar">
+        |]
+        
 postApagarCatR :: CategoriaId -> Handler Html
 postApagarCatR pid = do 
     _ <- runDB $ get404 pid
