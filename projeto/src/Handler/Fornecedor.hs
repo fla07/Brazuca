@@ -11,6 +11,12 @@ import Import
 import Network.HTTP.Types.Status
 import Database.Persist.Postgresql
 
+formFornec :: Form Fornecedor 
+formFornec = renderDivs $ Fornecedor 
+    <$> areq textField "Nome: " Nothing
+    <*> areq textField "Telefone: " Nothing 
+    <*> areq textField "Email: " Nothing
+
 postFornecedorR :: Handler Html 
 postFornecedorR = do 
     ((resultado,_),_) <- runFormPost formFornec
