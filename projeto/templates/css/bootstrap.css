@@ -45,6 +45,7 @@ template {
 }
 a {
   background-color: transparent;
+  color:rgba(255,252,252,1.00)
 }
 a:active,
 a:hover {

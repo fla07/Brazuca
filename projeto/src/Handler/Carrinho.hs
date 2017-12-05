@@ -5,3 +5,6 @@
 {-# LANGUAGE TypeFamilies, DeriveGeneric #-}
 
 module Handler.Carrinho where
+
+import Import
+import Database.Persist.Postgresql
