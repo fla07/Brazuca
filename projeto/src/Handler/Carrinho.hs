@@ -6,5 +6,5 @@
 
 module Handler.Carrinho where
 
-import Import
+import Import()
 import Database.Persist.Postgresql
